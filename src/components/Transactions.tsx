@@ -6,7 +6,6 @@ import { cardDetails, recent } from "../utils/images";
 import type { CardData } from "./DashboardLayout";
 
 const transactions = [
-  // ... (transactions list remains the same)
   {
     name: "Hamleys",
     amount: "+ S$ 150",
@@ -46,10 +45,10 @@ export default function Transactions({ card }: TransactionsProps) {
   const [isTransactionsExpanded, setIsTransactionsExpanded] = useState(true);
 
   return (
-    <aside className="bg-transparent px-0 md:px-8">
-      <div className="mx-auto flex h-full flex-col gap-6 px-6 md:px-0">
+    <aside className="bg-transparent px-0 lg:px-8">
+      <div className="mx-auto flex h-full flex-col gap-6 px-6 lg:px-0">
         {/* Card Details Accordion */}
-        <div className="overflow-hidden rounded-[8px] border border-[#f5f5f5] bg-white shadow-sm">
+        <div className="overflow-hidden rounded-lg border border-[#f5f5f5] bg-white shadow-sm">
           <AccordionHeader
             icon={<img src={cardDetails} alt="Card details" className="h-6" />}
             title="Card details"
@@ -107,7 +106,7 @@ export default function Transactions({ card }: TransactionsProps) {
         </div>
 
         {/* Recent Transactions Accordion */}
-        <div className="overflow-hidden rounded-[8px] border border-[#f5f5f5] bg-white shadow-sm">
+        <div className="overflow-hidden rounded-lg border border-[#f5f5f5] bg-white shadow-sm">
           <AccordionHeader
             icon={
               <img src={recent} alt="Recent transactions" className="h-6" />
@@ -168,7 +167,7 @@ function AccordionHeader({
       className={`flex items-center justify-between bg-white px-6 py-5 cursor-pointer hover:bg-[#F5F9FF] transition-colors ${
         insideCard
           ? "rounded-none border-0 shadow-none"
-          : "border border-[#f0f0f0] rounded-[8px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+          : "border border-[#f0f0f0] rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
       }`}
     >
       <div className="flex items-center gap-3">

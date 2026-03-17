@@ -14,4 +14,10 @@ import plane from "../assets/images/flights.png"
 import megaphone from "../assets/images/megaphone.png"
 import wallet from "../assets/images/wallet.png"
 import brandName from "../assets/images/Logo.png"
-export { logo, logoWhite, visa, cardDetails, recent, freezeicon, spendlimit, gpay, replacecard, deactivatecard, filestorage, plane, megaphone, wallet, brandName };
+import brandNameWhite from "../assets/images/Logo-white.png"
+import card from "../assets/images/Card.png"
+import payments from "../assets/images/Payments.png"
+import account from "../assets/images/Account.png"
+import credit from "../assets/images/Credit.png"
+
+export { logo, logoWhite, visa, cardDetails, recent, freezeicon, spendlimit, gpay, replacecard, deactivatecard, filestorage, plane, megaphone, wallet, brandName, brandNameWhite, card, payments, account, credit }; 

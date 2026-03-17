@@ -6,6 +6,7 @@ import {
   deactivatecard,
   spendlimit,
 } from "../utils/images";
+
 interface CardActionsProps {
   isFrozen: boolean;
   onToggleFreeze: () => void;
@@ -22,7 +23,7 @@ export default function CardActions({
   onToggleFreeze,
 }: CardActionsProps) {
   return (
-    <div className="flex justify-between items-start bg-[#EDF3FF] md:bg-[#EDF3FF] p-6 rounded-[16px] md:rounded-lg">
+    <div className="flex justify-between items-start bg-[#EDF3FF] lg:bg-[#EDF3FF] p-6 rounded-2xl lg:rounded-lg">
       <Action
         icon={freezeicon}
         label={isFrozen ? "Unfreeze card" : "Freeze card"}
@@ -44,12 +45,16 @@ function Action({ icon, label, onClick }: ActionProps) {
     >
       <div className="flex items-center justify-center text-white">
         {typeof icon === "string" ? (
-          <img src={icon} alt={label} className="w-8 h-8 md:w-8 md:h-8 object-contain" />
+          <img
+            src={icon}
+            alt={label}
+            className="w-8 h-8 lg:w-8 lg:h-8 object-contain"
+          />
         ) : (
           icon
         )}
       </div>
-      <span className="text-[10px] md:text-[11px] font-medium text-[#0C365A] leading-tight text-center">
+      <span className="text-[10px] lg:text-[11px] font-medium text-[#0C365A] leading-tight text-center">
         {label}
       </span>
     </div>

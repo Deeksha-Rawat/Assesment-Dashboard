@@ -7,7 +7,11 @@ interface AddCardModalProps {
   onAddCard: (name: string) => void;
 }
 
-export default function AddCardModal({ isOpen, onClose, onAddCard }: AddCardModalProps) {
+export default function AddCardModal({
+  isOpen,
+  onClose,
+  onAddCard,
+}: AddCardModalProps) {
   const [name, setName] = useState("");
 
   if (!isOpen) return null;
@@ -22,7 +26,7 @@ export default function AddCardModal({ isOpen, onClose, onAddCard }: AddCardModa
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-bold text-[#0C365A]">Add New Card</h2>
@@ -33,7 +37,10 @@ export default function AddCardModal({ isOpen, onClose, onAddCard }: AddCardModa
 
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label htmlFor="cardName" className="mb-2 block text-sm font-semibold text-[#222222]">
+            <label
+              htmlFor="cardName"
+              className="mb-2 block text-sm font-semibold text-[#222222]"
+            >
               Card Holder Name
             </label>
             <input

@@ -1,17 +1,16 @@
-import { Home, CreditCard, Repeat, ArrowUp, User } from "lucide-react";
-import { logo } from "../utils/images";
+import { brandNameWhite, logo, account, card, payments, credit } from "../utils/images";
 
 const navItems = [
-  { icon: Home, label: "Home" },
-  { icon: CreditCard, label: "Cards", active: true },
-  { icon: Repeat, label: "Payments" },
-  { icon: ArrowUp, label: "Credit" },
-  { icon: User, label: "Settings" },
-];
+  { icon: brandNameWhite, label: "Home" },
+  { icon: card, label: "Cards", active: true },
+  { icon: payments, label: "Payments" },
+  { icon: credit, label: "Credit" },
+  { icon: account, label: "Settings" },
+];  
 
 export default function Sidebar() {
   return (
-    <section className="flex p-12 flex-col bg-[#0C365A] text-white min-h-screen md:fixed md:top-0 md:left-0 md:h-screen md:z-30 md:w-80">
+    <section className="flex p-12 flex-col bg-[#0C365A] text-white min-h-screen lg:sticky lg:top-0 lg:left-0 lg:h-screen lg:z-30 lg:w-80">
       {/* TOP SECTION */}
       <div className="mb-16">
         {/* LOGO */}
@@ -27,7 +26,7 @@ export default function Sidebar() {
 
       {/* NAVIGATION */}
       <nav className="flex flex-col gap-10">
-        {navItems.map(({ icon: Icon, label, active }) => (
+        {navItems.map(({ icon, label, active }) => (
           <div
             key={label}
             className={`group flex items-center gap-6 text-lg font-medium transition-all duration-200 cursor-pointer
@@ -37,7 +36,7 @@ export default function Sidebar() {
             <div
               className={`flex items-center justify-center ${active ? "text-[#01D167]" : "text-white"}`}
             >
-              <Icon size={28} strokeWidth={2.5} />
+              <img src={icon} alt={label} className="h-6 w-6" />
             </div>
             <span>{label}</span>
           </div>

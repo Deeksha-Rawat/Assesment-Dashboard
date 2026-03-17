@@ -35,7 +35,7 @@ export default function Card({
       <div className="flex justify-end absolute -top-11 right-0 z-10 ">
         <button
           onClick={() => setShowNumber((prev) => !prev)}
-          className="inline-flex items-center gap-2 text-[10px] md:text-xs font-bold text-[#01D167] bg-white pt-2 pb-4 px-4 rounded-t-xl cursor-pointer translate-y-4"
+          className="inline-flex items-center gap-2 text-[10px] lg:text-xs font-bold text-[#01D167] bg-white pt-2 pb-4 px-4 rounded-t-xl cursor-pointer translate-y-4"
         >
           <Eye size={14} />
           {showNumber ? "Hide card number" : "Show card number"}
@@ -92,7 +92,7 @@ export default function Card({
 
         {/* Visa */}
         <div className="flex justify-end">
-          <img src={visa} alt="Visa" className="h-6 md:h-8 w-18 md:w-20" />
+          <img src={visa} alt="Visa" className="h-6 lg:h-8 w-18 lg:w-20" />
         </div>
       </div>
 
