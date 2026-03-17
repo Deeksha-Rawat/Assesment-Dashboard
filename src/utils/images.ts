@@ -6,7 +6,7 @@ import cardDetails from "../assets/images/Card-details.png";
 import recent from "../assets/images/Recent.png";
 import freezeicon from "../assets/images/Freeze-card.png";
 import spendlimit from "../assets/images/Spend-limit.png"
-import gpay from "../assets/images/Gpay.png"
+import gpay from ".../assets/images/GPay.png"
 import replacecard from "../assets/images/Replace-card.png"
 import deactivatecard from "../assets/images/Deactivate-card.png" 
 import filestorage from "../assets/images/file-storage.png"
