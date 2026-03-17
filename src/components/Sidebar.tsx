@@ -17,7 +17,7 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <section className="flex px-12 py-12 flex-col bg-[#0C365A] text-white min-h-screen lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:z-30 lg:w-80">
+    <section className="flex p-12 flex-col bg-[#0C365A] text-white min-h-screen lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:z-30 lg:w-80">
       
       {/* TOP SECTION */}
       <div className="mb-16">

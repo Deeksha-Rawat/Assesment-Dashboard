@@ -13,7 +13,7 @@ type ActionProps = {
 
 export default function CardActions({ isFrozen, onToggleFreeze }: CardActionsProps) {
   return (
-    <div className="mt-8 flex justify-between rounded-[16px] bg-[#EDF3FF] p-6 max-w-[414px] mx-auto">
+    <div className="mt-8 flex justify-between rounded-lg bg-[#EDF3FF] p-6  mx-auto">
       <Action
         icon={freezeicon}
         label={isFrozen ? "Unfreeze card" : "Freeze card"}
@@ -36,7 +36,7 @@ function Action({ icon, label, onClick }: ActionProps) {
       onClick={onClick}
       className="flex cursor-pointer flex-col items-center text-center gap-2 group hover:opacity-80 transition-opacity"
     >
-      <div className=" items-center justify-center rounded-full  text-white">
+      <div className="flex items-center justify-center rounded-full  text-white">
         {typeof icon === "string" ? (
           <img src={icon} alt={label} className="w-8 h-8 object-contain" />
         ) : (
