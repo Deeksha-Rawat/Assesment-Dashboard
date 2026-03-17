@@ -1,10 +1,7 @@
 
 import type { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import filestorage from "../assets/images/file-storage.png"
-import plane from "../assets/images/flights.png"
-import megaphone from "../assets/images/megaphone.png"
-import wallet from "../assets/images/wallet.png"
+import { filestorage, plane, megaphone, wallet } from "../utils/images";
 type TransactionItemProps = {
   name: string;
   amount: string;

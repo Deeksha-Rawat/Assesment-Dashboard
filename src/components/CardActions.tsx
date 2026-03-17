@@ -1,9 +1,5 @@
 import type { ReactNode } from "react";
-import freezeicon from "../assets/images/Freeze-card.png";
-import spendlimit from "../assets/images/Spend-limit.png"
-import gpay from "../assets/images/Gpay.png"
-import replacecard from "../assets/images/Replace-card.png"
-import deactivatecard from "../assets/images/Deactivate-card.png" 
+import { freezeicon, gpay, replacecard, deactivatecard, spendlimit } from "../utils/images";
 interface CardActionsProps {
   isFrozen: boolean;
   onToggleFreeze: () => void;
