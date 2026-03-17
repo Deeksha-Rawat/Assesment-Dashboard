@@ -4,7 +4,16 @@ import Card from "./Card";
 import CardActions from "./CardActions";
 import Transactions from "./Transactions";
 import AddCardModal from "./AddCardModal";
-import { PlusCircle, Home, CreditCard, Repeat, ArrowUp, User } from "lucide-react";
+import { brandName } from "../utils/images";
+import {
+  PlusCircle,
+  Home,
+  CreditCard,
+  Repeat,
+  ArrowUp,
+  User,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export interface CardData {
   id: string;
@@ -46,7 +55,9 @@ export default function DashboardLayout() {
     const newCard: CardData = {
       id: Math.random().toString(36).substr(2, 9),
       holderName: name,
-      cardNumber: Array.from({ length: 16 }, () => Math.floor(Math.random() * 10)).join(""),
+      cardNumber: Array.from({ length: 16 }, () =>
+        Math.floor(Math.random() * 10),
+      ).join(""),
       expiryDate: `${Math.floor(Math.random() * 12) + 1}/${Math.floor(Math.random() * 10) + 24}`,
       cvv: Math.floor(Math.random() * 900 + 100).toString(),
       isFrozen: false,
@@ -59,7 +70,8 @@ export default function DashboardLayout() {
 
   const handleToggleFreeze = () => {
     const updatedCards = [...cards];
-    updatedCards[currentCardIndex].isFrozen = !updatedCards[currentCardIndex].isFrozen;
+    updatedCards[currentCardIndex].isFrozen =
+      !updatedCards[currentCardIndex].isFrozen;
     setCards(updatedCards);
     localStorage.setItem("cards", JSON.stringify(updatedCards));
   };
@@ -71,104 +83,87 @@ export default function DashboardLayout() {
   const currentCard = cards[currentCardIndex];
 
   return (
-    <div className="flex min-h-screen bg-white lg:bg-[#f5f7fb]">
+    <div className="flex min-h-screen bg-[#0C365A] md:bg-[#f5f7fb]">
       <AddCardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddCard={handleAddCard}
       />
       {/* DESKTOP SIDEBAR */}
-      <div className="hidden lg:block">
+      <div className="hidden md:block">
         <Sidebar />
       </div>
 
-      {/* MOBILE HEADER (Dark Blue) */}
-      <div className="fixed top-0 left-0 right-0 bg-[#0C365A] lg:hidden -z-10" />
+      <main className="flex-1 md:pl-80 md:pr-16 md:py-12 relative">
+        <div className="mx-auto w-full md:w-[90%]">
+          {/* MOBILE HEADER (Dark Blue, Fixed) */}
+          <div className="md:hidden fixed top-0 left-0 right-0 bg-[#0C365A] z-0 h-[500px]" />
 
-      <main className="grid flex-1 lg:pl-80 lg:pr-16 lg:py-12 relative">
-        <div className="mx-auto w-[90%]">
-          
-          {/* DESKTOP HEADER */}
-          <header className="mb-10 hidden lg:block">
-            <p className="text-sm font-semibold text-[#222222] mb-4">Available balance</p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="flex h-6 w-10 items-center justify-center rounded-md bg-[#01D167] text-white text-xs font-bold">
-                  S$
+          <div className="relative z-10">
+            {/* TOP SECTION (Balance + Tabs + Card) */}
+            <div className="md:static sticky top-0 bg-[#0C365A] md:bg-transparent pt-8 md:pt-0 px-6 md:px-0 pb-4 md:pb-0 z-10">
+              <header className="mb-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-sm font-semibold text-white md:text-[#222222] mb-3">
+                      Account balance
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-5 w-10 items-center justify-center rounded-md bg-[#01D167] text-white text-[12px] font-bold">
+                        S$
+                      </div>
+                      <h1 className="text-2xl font-bold text-white md:text-[#222222]">
+                        3,000
+                      </h1>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <div className="md:hidden mb-4">
+                      <img src={brandName} alt="brandName" className="h-6 w-6" />
+                    </div>
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="flex items-center gap-2 text-xs font-bold text-[#23CEFD] md:bg-[#325BAF] md:px-4 md:py-2.5 md:text-white md:rounded-md transition-all hover:opacity-80"
+                    >
+                      <PlusCircle size={16} />
+                      New card
+                    </button>
+                  </div>
                 </div>
-                <h1 className="text-2xl font-bold text-[#222222]">3,000</h1>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 rounded-md bg-[#325BAF] px-4 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#29476c]"
-              >
-                <PlusCircle size={16} />
-                New card
-              </button>
-            </div>
-          </header>
 
-          {/* MOBILE HEADER CONTENT */}
-          <div className="lg:hidden px-6 pt-12 pb-8">
-            <div className="flex justify-between items-center mb-6">
-              <p className="text-sm font-semibold text-white">Account balance</p>
-              <div className="h-8 w-8 flex items-center justify-center rounded-full bg-[#01D167]/20">
-                <div className="h-3.5 w-3.5 rotate-45 border border-b-2 border-[#01D167]" />
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-6 w-10 items-center justify-center rounded-md bg-[#01D167] text-white text-xs font-bold">
-                  S$
+                {/* TABS */}
+                <div className="flex gap-8 border-b border-white/10 md:border-[#f0f0f0] mt-8">
+                  <button className="border-b-2 border-[#23CEFD] pb-2 text-sm font-bold text-white md:text-[#222222]">
+                    My debit cards
+                  </button>
+                  <button className="pb-2 text-sm font-semibold text-white/30 md:text-[#222222]/30">
+                    All company cards
+                  </button>
                 </div>
-                <h1 className="text-2xl font-bold text-white">3,000</h1>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 text-xs font-bold text-[#23CEFD]"
-              >
-                <PlusCircle size={16} />
-                New card
-              </button>
-            </div>
+              </header>
 
-            {/* TABS (Mobile) */}
-            <div className="flex gap-8">
-              <button className="border-b-2 border-[#23CEFD] pb-1 text-sm font-bold text-white">
-                My debit cards
-              </button>
-              <button className="pb-1 text-sm font-semibold text-white opacity-30">
-                All company cards
-              </button>
-            </div>
-          </div>
-
-          {/* CONTENT AREA */}
-          <div className="relative">
-            {/* TABS (Desktop) */}
-            <div className="mb-6 hidden lg:flex gap-8 border-b border-[#f0f0f0]">
-              <button className="border-b-2 border-[#23CEFD] pb-2 text-sm font-bold text-[#222222]">
-                My debit cards
-              </button>
-              <button className="pb-2 text-sm font-semibold text-[#222222] opacity-30">
-                All company cards
-              </button>
-            </div>
-
-            {/* MAIN GRID / MOBILE TRAY */}
-            <div className="lg:grid lg:grid-cols-2 lg:gap-12 rounded-lg lg:border lg:border-[#FCFCFC] lg:bg-white lg:p-10 lg:shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-              
-              {/* CARD SECTION */}
-              <div className="flex flex-col mb-4 lg:mb-0">
+              {/* CARD SECTION (Fixed on mobile until scroll) */}
+              <div className="md:hidden flex flex-col items-center pt-8 pb-4">
                 <Card
                   card={currentCard}
                   cardsCount={cards.length}
                   currentIndex={currentCardIndex}
                   onPageChange={setCurrentCardIndex}
                 />
-                {/* Desktop Actions */}
-                <div className="hidden lg:block">
+              </div>
+            </div>
+
+            {/* MAIN CONTENT AREA / MOBILE TRAY */}
+            <div className="relative md:grid md:grid-cols-2 md:gap-12 rounded-lg md:border md:border-[#FCFCFC] md:bg-white md:p-10 md:shadow-[0_2px_12px_rgba(0,0,0,0.04)] mt-0 md:mt-0">
+              {/* DESKTOP CARD VIEW */}
+              <div className="hidden md:flex flex-col items-center">
+                <Card
+                  card={currentCard}
+                  cardsCount={cards.length}
+                  currentIndex={currentCardIndex}
+                  onPageChange={setCurrentCardIndex}
+                />
+                <div className="w-full mt-10">
                   <CardActions
                     isFrozen={currentCard.isFrozen}
                     onToggleFreeze={handleToggleFreeze}
@@ -177,8 +172,8 @@ export default function DashboardLayout() {
               </div>
 
               {/* MOBILE TRAY (WHITE BOTTOM SHEET) */}
-              <div className="lg:hidden bg-white rounded-t-3xl mt-4 shadow-[0_-8px_30px_rgba(0,0,0,0.05)] pt-6 pb-24">
-                <div className="px-6 mb-8">
+              <div className="md:hidden bg-white rounded-t-4xl shadow-[0_-8px_30px_rgba(0,0,0,0.1)] pt-6 pb-24 relative z-20 min-h-screen">
+                <div className="px-6 mb-6">
                   <CardActions
                     isFrozen={currentCard.isFrozen}
                     onToggleFreeze={handleToggleFreeze}
@@ -187,8 +182,8 @@ export default function DashboardLayout() {
                 <Transactions card={currentCard} />
               </div>
 
-              {/* DESKTOP TRANSACTIONS */}
-              <div className="hidden lg:block">
+              {/* DESKTOP TRANSACTIONS VIEW */}
+              <div className="hidden md:block">
                 <Transactions card={currentCard} />
               </div>
             </div>
@@ -197,7 +192,7 @@ export default function DashboardLayout() {
       </main>
 
       {/* MOBILE BOTTOM NAVIGATION */}
-      <nav className="fixed bottom-0 left-0 right-0 h-20 bg-white border-t border-[#f0f0f0] lg:hidden flex items-center justify-between px-6 z-50">
+      <nav className="fixed bottom-0 left-0 right-0 h-20 bg-white border-t border-[#f0f0f0] md:hidden flex items-center justify-between px-6 z-50">
         <NavItem icon={Home} label="Home" />
         <NavItem icon={CreditCard} label="Cards" active />
         <NavItem icon={Repeat} label="Payments" />
@@ -208,9 +203,19 @@ export default function DashboardLayout() {
   );
 }
 
-function NavItem({ icon: Icon, label, active = false }: { icon: any; label: string; active?: boolean }) {
+function NavItem({
+  icon: Icon,
+  label,
+  active = false,
+}: {
+  icon: LucideIcon;
+  label: string;
+  active?: boolean;
+}) {
   return (
-    <div className={`flex flex-col items-center gap-1 cursor-pointer ${active ? "text-[#01D167]" : "text-[#dddddd]"}`}>
+    <div
+      className={`flex flex-col items-center gap-1 cursor-pointer ${active ? "text-[#01D167]" : "text-[#dddddd]"}`}
+    >
       <Icon size={24} />
       <span className="text-[10px] font-bold">{label}</span>
     </div>

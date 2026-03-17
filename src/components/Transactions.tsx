@@ -47,9 +47,9 @@ export default function Transactions({ card }: TransactionsProps) {
 
   return (
     <aside className="bg-transparent px-0 md:px-8">
-      <div className="mx-auto flex h-full flex-col gap-6 px-6 lg:px-0">
+      <div className="mx-auto flex h-full flex-col gap-6 px-6 md:px-0">
         {/* Card Details Accordion */}
-        <div className="overflow-hidden rounded-sm border border-[#f0f0f0] bg-white shadow-sm">
+        <div className="overflow-hidden rounded-[8px] border border-[#f5f5f5] bg-white shadow-sm">
           <AccordionHeader
             icon={<img src={cardDetails} alt="Card details" className="h-6" />}
             title="Card details"
@@ -65,24 +65,38 @@ export default function Transactions({ card }: TransactionsProps) {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-4 border-t border-[#f0f0f0]">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#222222]/60 font-medium">Card Holder</span>
-                    <span className="text-[#0C365A] font-bold">{card?.holderName || "N/A"}</span>
+                    <span className="text-[#222222]/60 font-medium">
+                      Card Holder
+                    </span>
+                    <span className="text-[#0C365A] font-bold">
+                      {card?.holderName || "N/A"}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#222222]/60 font-medium">Card Number</span>
+                    <span className="text-[#222222]/60 font-medium">
+                      Card Number
+                    </span>
                     <span className="text-[#0C365A] font-bold tracking-wider">
                       {card?.cardNumber ? `${card.cardNumber}` : "N/A"}
                     </span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#222222]/60 font-medium">Expiry Date</span>
-                    <span className="text-[#0C365A] font-bold">{card?.expiryDate || "N/A"}</span>
+                    <span className="text-[#222222]/60 font-medium">
+                      Expiry Date
+                    </span>
+                    <span className="text-[#0C365A] font-bold">
+                      {card?.expiryDate || "N/A"}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#222222]/60 font-medium">Status</span>
-                    <span className={`font-bold ${card?.isFrozen ? "text-red-500" : "text-[#01D167]"}`}>
+                    <span className="text-[#222222]/60 font-medium">
+                      Status
+                    </span>
+                    <span
+                      className={`font-bold ${card?.isFrozen ? "text-red-500" : "text-[#01D167]"}`}
+                    >
                       {card?.isFrozen ? "Frozen" : "Active"}
                     </span>
                   </div>
@@ -93,9 +107,11 @@ export default function Transactions({ card }: TransactionsProps) {
         </div>
 
         {/* Recent Transactions Accordion */}
-        <div className="overflow-hidden rounded-sm border border-[#f0f0f0] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.05)]">
+        <div className="overflow-hidden rounded-[8px] border border-[#f5f5f5] bg-white shadow-sm">
           <AccordionHeader
-            icon={<img src={recent} alt="Recent transactions" className="h-6" />}
+            icon={
+              <img src={recent} alt="Recent transactions" className="h-6" />
+            }
             title="Recent transactions"
             expanded={isTransactionsExpanded}
             onClick={() => setIsTransactionsExpanded(!isTransactionsExpanded)}
@@ -110,9 +126,12 @@ export default function Transactions({ card }: TransactionsProps) {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <div className="px-6">
+                <div className="px-6 border-t border-[#f0f0f0]">
                   {transactions.map((transaction, index) => (
-                    <TransactionItem key={`${transaction.name}-${index}`} {...transaction} />
+                    <TransactionItem
+                      key={`${transaction.name}-${index}`}
+                      {...transaction}
+                    />
                   ))}
                 </div>
 
@@ -146,8 +165,10 @@ function AccordionHeader({
   return (
     <div
       onClick={onClick}
-      className={`flex items-center justify-between border border-[#f0f0f0] opacity-100 bg-[#F5F9FF] px-6 py-5 shadow-[0_-8px_30px_rgba(0,0,0,0.05)] cursor-pointer hover:bg-[#F0F6FF] transition-colors ${
-        insideCard ? "rounded-none border-0 border-b bg-[#F5F9FF] shadow-none" : ""
+      className={`flex items-center justify-between bg-white px-6 py-5 cursor-pointer hover:bg-[#F5F9FF] transition-colors ${
+        insideCard
+          ? "rounded-none border-0 shadow-none"
+          : "border border-[#f0f0f0] rounded-[8px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
       }`}
     >
       <div className="flex items-center gap-3">
@@ -157,8 +178,12 @@ function AccordionHeader({
         <h2 className="text-sm font-bold text-[#0C365A]">{title}</h2>
       </div>
 
-      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D7E1F3] text-white">
-        {expanded ? <ChevronUp size={16} className="text-[#7F9BB7]" /> : <ChevronDown size={16} className="text-[#7F9BB7]" />}
+      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#F5F9FF] text-[#D7E1F3]">
+        {expanded ? (
+          <ChevronUp size={18} className="text-[#D7E1F3]" />
+        ) : (
+          <ChevronDown size={18} className="text-[#D7E1F3]" />
+        )}
       </div>
     </div>
   );

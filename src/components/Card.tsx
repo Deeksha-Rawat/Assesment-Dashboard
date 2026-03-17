@@ -30,13 +30,12 @@ export default function Card({
   const formattedNumber = formatCardNumber(card.cardNumber);
 
   return (
-    <section className="w-full relative">
-      
+    <section className="relative w-full max-w-103.5">
       {/* Toggle Button */}
-      <div className="flex justify-end relative z-10">
+      <div className="flex justify-end absolute -top-11 right-0 z-10 ">
         <button
           onClick={() => setShowNumber((prev) => !prev)}
-          className="inline-flex items-center gap-2 text-xs font-bold text-[#01d167] bg-white  py-2 px-3 rounded cursor-pointer"
+          className="inline-flex items-center gap-2 text-[10px] md:text-xs font-bold text-[#01D167] bg-white pt-2 pb-4 px-4 rounded-t-xl cursor-pointer translate-y-4"
         >
           <Eye size={14} />
           {showNumber ? "Hide card number" : "Show card number"}
@@ -45,13 +44,13 @@ export default function Card({
 
       {/* Card */}
       <div
-        className={`rounded-lg bg-[#01d167] p-6 text-white shadow-lg aspect-[1.6/1] flex flex-col justify-between relative z-20 transition-opacity duration-300 ${
+        className={`w-full aspect-[1.58/1] rounded-2xl bg-[#01D167] p-6 text-white shadow-lg flex flex-col justify-between relative z-20 transition-opacity duration-300 ${
           card.isFrozen ? "opacity-50" : "opacity-100"
         }`}
       >
         {/* Logo */}
         <div className="flex justify-end">
-           <img src={logoWhite} alt="Aspire Logo" className="h-6" />
+          <img src={logoWhite} alt="Aspire Logo" className="h-6" />
         </div>
 
         <div className="space-y-6">
@@ -63,22 +62,18 @@ export default function Card({
           <div className="flex items-center gap-6 text-lg font-bold">
             {formattedNumber.map((group, idx) => (
               <div key={idx} className="flex gap-1.5">
-                
-                {showNumber || idx === 3 ? (
-                  // SHOW DIGITS
-                  group.split("").map((digit, i) => (
-                    <span key={i}>{digit}</span>
-                  ))
-                ) : (
-                  // MASKED DOTS
-                  [...Array(4)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="h-2.5 w-2.5 rounded-full bg-white"
-                    />
-                  ))
-                )}
-
+                {showNumber || idx === 3
+                  ? // SHOW DIGITS
+                    group
+                      .split("")
+                      .map((digit, i) => <span key={i}>{digit}</span>)
+                  : // MASKED DOTS
+                    [...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-2.5 w-2.5 rounded-full bg-white"
+                      />
+                    ))}
               </div>
             ))}
           </div>
@@ -97,7 +92,7 @@ export default function Card({
 
         {/* Visa */}
         <div className="flex justify-end">
-           <img src={visa} alt="Visa" className="h-8 w-20" />
+          <img src={visa} alt="Visa" className="h-6 md:h-8 w-18 md:w-20" />
         </div>
       </div>
 
@@ -108,9 +103,7 @@ export default function Card({
             key={idx}
             onClick={() => onPageChange(idx)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              idx === currentIndex
-                ? "w-4 bg-[#01d167]"
-                : "w-2 bg-[#01d167]/20"
+              idx === currentIndex ? "w-4 bg-[#01d167]" : "w-2 bg-[#01d167]/20"
             }`}
           />
         ))}

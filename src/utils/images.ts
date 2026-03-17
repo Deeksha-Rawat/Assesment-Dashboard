@@ -13,4 +13,5 @@ import filestorage from "../assets/images/file-storage.png"
 import plane from "../assets/images/flights.png"
 import megaphone from "../assets/images/megaphone.png"
 import wallet from "../assets/images/wallet.png"
-export { logo, logoWhite, visa, cardDetails, recent, freezeicon, spendlimit, gpay, replacecard, deactivatecard, filestorage, plane, megaphone, wallet };
+import brandName from "../assets/images/Logo.png"
+export { logo, logoWhite, visa, cardDetails, recent, freezeicon, spendlimit, gpay, replacecard, deactivatecard, filestorage, plane, megaphone, wallet, brandName };

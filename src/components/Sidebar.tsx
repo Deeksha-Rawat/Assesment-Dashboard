@@ -1,10 +1,4 @@
-import {
-  Home,
-  CreditCard,
-  Repeat,
-  ArrowUp,
-  User,
-} from "lucide-react";
+import { Home, CreditCard, Repeat, ArrowUp, User } from "lucide-react";
 import { logo } from "../utils/images";
 
 const navItems = [
@@ -17,8 +11,7 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <section className="flex p-12 flex-col bg-[#0C365A] text-white min-h-screen lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:z-30 lg:w-80">
-      
+    <section className="flex p-12 flex-col bg-[#0C365A] text-white min-h-screen md:fixed md:top-0 md:left-0 md:h-screen md:z-30 md:w-80">
       {/* TOP SECTION */}
       <div className="mb-16">
         {/* LOGO */}
@@ -38,17 +31,13 @@ export default function Sidebar() {
           <div
             key={label}
             className={`group flex items-center gap-6 text-lg font-medium transition-all duration-200 cursor-pointer
-              ${active 
-                ? "text-[#01D167]" 
-                : "text-white hover:text-[#01D167]"
-              }
+              ${active ? "text-[#01D167]" : "text-white hover:text-[#01D167]"}
             `}
           >
-            <div className={`flex items-center justify-center ${active ? "text-[#01D167]" : "text-white"}`}>
-              <Icon
-                size={28}
-                strokeWidth={2.5}
-              />
+            <div
+              className={`flex items-center justify-center ${active ? "text-[#01D167]" : "text-white"}`}
+            >
+              <Icon size={28} strokeWidth={2.5} />
             </div>
             <span>{label}</span>
           </div>
