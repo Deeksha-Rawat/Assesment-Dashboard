@@ -5,17 +5,9 @@ import type { CardData } from "./DashboardLayout";
 
 interface CardProps {
   card: CardData;
-  cardsCount: number;
-  currentIndex: number;
-  onPageChange: (index: number) => void;
 }
 
-export default function Card({
-  card,
-  cardsCount,
-  currentIndex,
-  onPageChange,
-}: CardProps) {
+export default function Card({ card }: CardProps) {
   const [showNumber, setShowNumber] = useState(false);
 
   const formatCardNumber = (number: string) => {
@@ -30,60 +22,71 @@ export default function Card({
   const formattedNumber = formatCardNumber(card.cardNumber);
 
   return (
-    <section className="relative w-full max-w-103.5">
+    <section className="relative w-full mx-auto pt-12 lg:pt-0">
       {/* Toggle Button */}
-      <div className="flex justify-end absolute -top-11 right-0 z-10 ">
+      <div
+        className={`flex justify-end absolute top-6  lg:-top-8 right-0 z-0 w-full ${card.isFrozen ? "pointer-events-none opacity-50" : ""}`}
+      >
         <button
           onClick={() => setShowNumber((prev) => !prev)}
-          className="inline-flex items-center gap-2 text-[10px] lg:text-xs font-bold text-[#01D167] bg-white pt-2 pb-4 px-4 rounded-t-xl cursor-pointer translate-y-4"
+          className={`inline-flex pb-3 items-center gap-2 text-[10px] lg:text-xs font-bold text-[#01D167] bg-white py-2 px-3 lg:px-4 rounded-t-lg cursor-pointer ${card.isFrozen ? "pointer-events-none opacity-50 bg-[darkslategrey]" : ""}`}
         >
-          <Eye size={14} />
-          {showNumber ? "Hide card number" : "Show card number"}
+          <Eye size={12} className="lg:w-3.5 lg:h-3.5" />
+          <span className="whitespace-nowrap">
+            {showNumber ? "Hide card number" : "Show card number"}
+          </span>
         </button>
       </div>
 
       {/* Card */}
       <div
-        className={`w-full aspect-[1.58/1] rounded-2xl bg-[#01D167] p-6 text-white shadow-lg flex flex-col justify-between relative z-20 transition-opacity duration-300 ${
+        className={`w-full aspect-[1.58/1] rounded-2xl bg-[#01D167] p-5 lg:p-6 text-white shadow-lg flex flex-col justify-between relative transition-opacity duration-300 ${
           card.isFrozen ? "opacity-50" : "opacity-100"
         }`}
       >
         {/* Logo */}
         <div className="flex justify-end">
-          <img src={logoWhite} alt="Aspire Logo" className="h-6" />
+          <img src={logoWhite} alt="Aspire Logo" className="h-5 lg:h-6" />
         </div>
 
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold tracking-wide">
+        <div className="space-y-4 lg:space-y-6">
+          <h2 className="text-xl lg:text-2xl font-bold tracking-wide">
             {card.holderName}
           </h2>
 
           {/* Card Number */}
-          <div className="flex items-center gap-6 text-lg font-bold">
+          <div className="flex items-center gap-3 lg:gap-4 text-base lg:text-lg font-bold">
             {formattedNumber.map((group, idx) => (
-              <div key={idx} className="flex gap-1.5">
+              <div key={idx} className="flex gap-1 min-w-10 lg:min-w-12">
                 {showNumber || idx === 3
                   ? // SHOW DIGITS
-                    group
-                      .split("")
-                      .map((digit, i) => <span key={i}>{digit}</span>)
+                    group.split("").map((digit, i) => (
+                      <span
+                        key={i}
+                        className="inline-block w-[0.5em] text-center"
+                      >
+                        {digit}
+                      </span>
+                    ))
                   : // MASKED DOTS
                     [...Array(4)].map((_, i) => (
-                      <div
+                      <span
                         key={i}
-                        className="h-2.5 w-2.5 rounded-full bg-white"
-                      />
+                        className="inline-block w-[0.5em] text-center"
+                      >
+                        •
+                      </span>
                     ))}
               </div>
             ))}
           </div>
 
           {/* Expiry + CVV */}
-          <div className="flex items-center gap-8 text-sm font-bold">
-            <span>Thru: {card.expiryDate}</span>
-            <span className="flex items-baseline gap-1">
+          <div className="flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-bold">
+            <span className="whitespace-nowrap">Thru: {card.expiryDate}</span>
+            <span className="flex items-baseline gap-1 whitespace-nowrap">
               CVV:
-              <span className="text-lg leading-none pt-1">
+              <span className="text-base lg:text-lg leading-none">
                 {showNumber ? card.cvv : "***"}
               </span>
             </span>
@@ -92,21 +95,12 @@ export default function Card({
 
         {/* Visa */}
         <div className="flex justify-end">
-          <img src={visa} alt="Visa" className="h-6 lg:h-8 w-18 lg:w-20" />
-        </div>
-      </div>
-
-      {/* Pagination */}
-      <div className="mt-4 flex justify-center gap-2">
-        {Array.from({ length: cardsCount }).map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => onPageChange(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? "w-4 bg-[#01d167]" : "w-2 bg-[#01d167]/20"
-            }`}
+          <img
+            src={visa}
+            alt="Visa"
+            className="h-5 lg:h-8 w-16 lg:w-20 object-contain"
           />
-        ))}
+        </div>
       </div>
     </section>
   );
